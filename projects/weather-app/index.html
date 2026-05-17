@@ -1,1 +1,270 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Weather App</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,sans-serif;background:linear-gradient(180deg,#1e3a5f 0%,#4a90d9 40%,#87ceeb 100%);color:#fff;min-height:100vh;padding:32px}.wrap{max-width:420px;margin:0 auto}h1{font-size:24px;font-weight:600;margin-bottom:4px}.sub{color:rgba(255,255,255,.6);font-size:13px;margin-bottom:20px}.sb{display:flex;gap:8px;margin-bottom:24px}.sb input{flex:1;padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:#fff;font-size:13px;outline:none;backdrop-filter:blur(6px)}.sb input::placeholder{color:rgba(255,255,255,.4)}.sb input:focus{border-color:rgba(255,255,255,.4)}.sb button{padding:10px 20px;border-radius:8px;background:rgba(255,255,255,.2);color:#fff;border:none;cursor:pointer;font-size:13px;backdrop-filter:blur(6px)}.wc{padding:32px;border-radius:16px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);text-align:center;display:none}.wc.show{display:block}.wc .wi{font-size:56px;margin-bottom:8px}.wc .wn{font-size:20px;font-weight:600;margin-bottom:2px}.wc .wd{font-size:12px;color:rgba(255,255,255,.65);text-transform:capitalize;margin-bottom:16px}.wc .wt{font-size:48px;font-weight:300;letter-spacing:-2px;margin-bottom:16px}.wd2{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.wd2 .wi2{padding:10px;border-radius:8px;background:rgba(255,255,255,.08)}.wi2 .wl{font-size:9px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px}.wi2 .wv{font-size:13px;font-weight:500;margin-top:2px}.nf{text-align:center;color:#fca5a5;padding:36px;display:none}</style></head><body><div class="wrap"><h1>Weather App</h1><p class="sub">Cek cuaca di berbagai kota</p><div class="sb"><input id="ci4" placeholder="Nama kota..." value="Denpasar" onkeypress="if(event.key==='Enter')sw()"><button onclick="sw()">Cari</button></div><div class="wc" id="wc"><div class="wi" id="wi"></div><div class="wn" id="wn"></div><div class="wd" id="wd"></div><div class="wt" id="wt"></div><div class="wd2"><div class="wi2"><div class="wl">Kelembapan</div><div class="wv" id="wh"></div></div><div class="wi2"><div class="wl">Angin</div><div class="wv" id="ww"></div></div><div class="wi2"><div class="wl">Tekanan</div><div class="wv" id="wp"></div></div></div></div><div class="nf" id="nf">Kota tidak ditemukan. Coba: Denpasar, Jakarta, Bandung, Surabaya</div></div><div style="margin-top:48px;padding:24px 0;border-top:1px solid rgba(128,128,128,0.12);text-align:center"><a href="../../downloads/weather-app.zip" download style="display:inline-block;padding:13px 32px;border-radius:8px;background:#2563eb;color:#fff;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:-0.3px">Download Source Code (.zip)</a></div><script>var wd={"denpasar":{i:"\u2600",t:31,d:"Cerah Berawan",h:"75%",w:"12 km/h",p:"1012 hPa"},"jakarta":{i:"\u2601",t:33,d:"Berawan Tebal",h:"82%",w:"8 km/h",p:"1010 hPa"},"bandung":{i:"\u2602",t:24,d:"Hujan Ringan",h:"88%",w:"15 km/h",p:"1008 hPa"},"surabaya":{i:"\u2600",t:34,d:"Cerah",h:"65%",w:"10 km/h",p:"1014 hPa"},"yogyakarta":{i:"\u26c5",t:29,d:"Cerah Berawan",h:"70%",w:"9 km/h",p:"1011 hPa"},"bali":{i:"\u2600",t:30,d:"Cerah",h:"78%",w:"14 km/h",p:"1013 hPa"}};function sw(){var c=document.getElementById("ci4").value.trim().toLowerCase(),card=document.getElementById("wc"),nf=document.getElementById("nf"),data=wd[c];if(!data){card.classList.remove("show");nf.style.display="block";return;}nf.style.display="none";document.getElementById("wi").innerHTML=data.i;document.getElementById("wn").textContent=document.getElementById("ci4").value.trim();document.getElementById("wd").textContent=data.d;document.getElementById("wt").textContent=data.t+"\u00b0C";document.getElementById("wh").textContent=data.h;document.getElementById("ww").textContent=data.w;document.getElementById("wp").textContent=data.p;card.classList.add("show");}sw();</script></body></html>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Weather App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: system-ui, sans-serif;
+        background: linear-gradient(
+          180deg,
+          #1e3a5f 0%,
+          #4a90d9 40%,
+          #87ceeb 100%
+        );
+        color: #fff;
+        min-height: 100vh;
+        padding: 32px;
+      }
+      .wrap {
+        max-width: 420px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .sub {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 13px;
+        margin-bottom: 20px;
+      }
+      .sb {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .sb input {
+        flex: 1;
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-size: 13px;
+        outline: none;
+        backdrop-filter: blur(6px);
+      }
+      .sb input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+      .sb input:focus {
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+      .sb button {
+        padding: 10px 20px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 13px;
+        backdrop-filter: blur(6px);
+      }
+      .wc {
+        padding: 32px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        text-align: center;
+        display: none;
+      }
+      .wc.show {
+        display: block;
+      }
+      .wc .wi {
+        font-size: 56px;
+        margin-bottom: 8px;
+      }
+      .wc .wn {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+      .wc .wd {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.65);
+        text-transform: capitalize;
+        margin-bottom: 16px;
+      }
+      .wc .wt {
+        font-size: 48px;
+        font-weight: 300;
+        letter-spacing: -2px;
+        margin-bottom: 16px;
+      }
+      .wd2 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .wd2 .wi2 {
+        padding: 10px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .wi2 .wl {
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .wi2 .wv {
+        font-size: 13px;
+        font-weight: 500;
+        margin-top: 2px;
+      }
+      .nf {
+        text-align: center;
+        color: #fca5a5;
+        padding: 36px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Weather App</h1>
+      <p class="sub">Cek cuaca di berbagai kota</p>
+      <div class="sb">
+        <input
+          id="ci4"
+          placeholder="Nama kota..."
+          value="Denpasar"
+          onkeypress="if (event.key === 'Enter') sw();"
+        /><button onclick="sw()">Cari</button>
+      </div>
+      <div class="wc" id="wc">
+        <div class="wi" id="wi"></div>
+        <div class="wn" id="wn"></div>
+        <div class="wd" id="wd"></div>
+        <div class="wt" id="wt"></div>
+        <div class="wd2">
+          <div class="wi2">
+            <div class="wl">Kelembapan</div>
+            <div class="wv" id="wh"></div>
+          </div>
+          <div class="wi2">
+            <div class="wl">Angin</div>
+            <div class="wv" id="ww"></div>
+          </div>
+          <div class="wi2">
+            <div class="wl">Tekanan</div>
+            <div class="wv" id="wp"></div>
+          </div>
+        </div>
+      </div>
+      <div class="nf" id="nf">
+        Kota tidak ditemukan. Coba: Denpasar, Jakarta, Bandung, Surabaya
+      </div>
+    </div>
+    <div
+      style="
+        margin-top: 48px;
+        padding: 24px 0;
+        border-top: 1px solid rgba(128, 128, 128, 0.12);
+        text-align: center;
+      "
+    >
+      <a
+        href="../../downloads/weather-app.zip"
+        download
+        style="
+          display: inline-block;
+          padding: 13px 32px;
+          border-radius: 8px;
+          background: #2563eb;
+          color: #fff;
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: -0.3px;
+        "
+        >Download Source Code (.zip)</a
+      >
+    </div>
+    <script>
+      var wd = {
+        denpasar: {
+          i: "\u2600",
+          t: 31,
+          d: "Cerah Berawan",
+          h: "75%",
+          w: "12 km/h",
+          p: "1012 hPa",
+        },
+        jakarta: {
+          i: "\u2601",
+          t: 33,
+          d: "Berawan Tebal",
+          h: "82%",
+          w: "8 km/h",
+          p: "1010 hPa",
+        },
+        bandung: {
+          i: "\u2602",
+          t: 24,
+          d: "Hujan Ringan",
+          h: "88%",
+          w: "15 km/h",
+          p: "1008 hPa",
+        },
+        surabaya: {
+          i: "\u2600",
+          t: 34,
+          d: "Cerah",
+          h: "65%",
+          w: "10 km/h",
+          p: "1014 hPa",
+        },
+        yogyakarta: {
+          i: "\u26c5",
+          t: 29,
+          d: "Cerah Berawan",
+          h: "70%",
+          w: "9 km/h",
+          p: "1011 hPa",
+        },
+        bali: {
+          i: "\u2600",
+          t: 30,
+          d: "Cerah",
+          h: "78%",
+          w: "14 km/h",
+          p: "1013 hPa",
+        },
+      };
+      function sw() {
+        var c = document.getElementById("ci4").value.trim().toLowerCase(),
+          card = document.getElementById("wc"),
+          nf = document.getElementById("nf"),
+          data = wd[c];
+        if (!data) {
+          card.classList.remove("show");
+          nf.style.display = "block";
+          return;
+        }
+        nf.style.display = "none";
+        document.getElementById("wi").innerHTML = data.i;
+        document.getElementById("wn").textContent = document
+          .getElementById("ci4")
+          .value.trim();
+        document.getElementById("wd").textContent = data.d;
+        document.getElementById("wt").textContent = data.t + "\u00b0C";
+        document.getElementById("wh").textContent = data.h;
+        document.getElementById("ww").textContent = data.w;
+        document.getElementById("wp").textContent = data.p;
+        card.classList.add("show");
+      }
+      sw();
+    </script>
+  </body>
+</html>
