@@ -1,1 +1,233 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Sorting Visualizer</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#0a0a0a;color:#e2e8f0;min-height:100vh;padding:32px}.wrap{max-width:650px;margin:0 auto}h1{font-size:24px;font-weight:600;margin-bottom:4px}.sub{color:#64748b;font-size:13px;margin-bottom:20px}.ct{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;align-items:center}.ct select,.ct button{padding:9px 14px;border-radius:8px;border:1px solid #1e293b;background:#1e293b;color:#e2e8f0;font-size:12px;cursor:pointer}.ct select option{background:#0a0a0a}.ct .pr{background:#2563eb;border-color:#2563eb}.ct .pr:hover{background:#1d4ed8}.ct button:disabled{opacity:.4;cursor:not-allowed}.bc{display:flex;align-items:flex-end;gap:2px;height:280px;padding:16px 0;border-bottom:1px solid #1e293b}.bar{flex:1;background:#2563eb;border-radius:3px 3px 0 0;transition:height .2s,background .2s;min-width:3px}.bar.cmp{background:#f59e0b}.bar.srt{background:#22c55e}.bar.piv{background:#ef4444}.ib{margin-top:18px;padding:14px;border-radius:10px;background:#1e293b;font-size:12px;color:#94a3b8;line-height:1.7}.ib strong{color:#e2e8f0}</style></head><body><div class="wrap"><h1>Sorting Visualizer</h1><p class="sub">Visualisasi algoritma Bubble Sort &amp; Selection Sort</p><div class="ct"><select id="as"><option value="bubble">Bubble Sort</option><option value="selection">Selection Sort</option></select><select id="ss" onchange="ga()"><option value="15">15 Elemen</option><option value="25" selected>25 Elemen</option><option value="40">40 Elemen</option></select><button class="pr" id="sb" onclick="startSort()">Mulai</button><button onclick="ga()">Acak Ulang</button></div><div class="bc" id="bc"></div><div class="ib"><strong>Bubble Sort:</strong> Bandingkan bersebelahan, swap jika lebih besar. O(n2).<br><strong>Selection Sort:</strong> Cari terkecil, pindah ke posisi benar. O(n2).<br><em>Biru=default, Kuning=bandingkan, Merah=pivot, Hijau=selesai</em></div></div><div style="margin-top:48px;padding:24px 0;border-top:1px solid rgba(128,128,128,0.12);text-align:center"><a href="../../downloads/sorting-visualizer.zip" download style="display:inline-block;padding:13px 32px;border-radius:8px;background:#2563eb;color:#fff;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:-0.3px">Download Source Code (.zip)</a></div><script>var arr=[],sorting=false;function ga(){if(sorting)return;var sz=parseInt(document.getElementById("ss").value);arr=[];for(var i=0;i<sz;i++)arr.push(Math.floor(Math.random()*220)+10);rb([],[],-1);}function rb(cL,sL,pI){var c=document.getElementById("bc");c.innerHTML="";var mx=Math.max.apply(null,arr);for(var i=0;i<arr.length;i++){var b=document.createElement("div");b.className="bar";if(cL.indexOf(i)!==-1)b.className+=" cmp";if(sL.indexOf(i)!==-1)b.className+=" srt";if(i===pI)b.className+=" piv";b.style.height=Math.max(4,(arr[i]/mx)*240)+"px";c.appendChild(b);}}function sl(ms){return new Promise(function(r){setTimeout(r,ms);});}async function startSort(){if(sorting)return;sorting=true;document.getElementById("sb").disabled=true;var a=document.getElementById("as").value;if(a==="bubble")await bs();else await ses();sorting=false;document.getElementById("sb").disabled=false;}async function bs(){var sr=[];for(var i=0;i<arr.length-1;i++){for(var j=0;j<arr.length-1-i;j++){rb([j,j+1],sr,-1);await sl(50);if(arr[j]>arr[j+1]){var t=arr[j];arr[j]=arr[j+1];arr[j+1]=t;}}sr.push(arr.length-1-i);}sr.push(0);rb([],sr,-1);}async function ses(){var sr=[];for(var i=0;i<arr.length-1;i++){var mi=i;for(var j=i+1;j<arr.length;j++){rb([j],sr,mi);await sl(50);if(arr[j]<arr[mi])mi=j;}if(mi!==i){var t=arr[i];arr[i]=arr[mi];arr[mi]=t;}sr.push(i);}sr.push(arr.length-1);rb([],sr,-1);}ga();</script></body></html>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Sorting Visualizer</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: system-ui, sans-serif;
+        background: #0a0a0a;
+        color: #e2e8f0;
+        min-height: 100vh;
+        padding: 32px;
+      }
+      .wrap {
+        max-width: 650px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .sub {
+        color: #64748b;
+        font-size: 13px;
+        margin-bottom: 20px;
+      }
+      .ct {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .ct select,
+      .ct button {
+        padding: 9px 14px;
+        border-radius: 8px;
+        border: 1px solid #1e293b;
+        background: #1e293b;
+        color: #e2e8f0;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .ct select option {
+        background: #0a0a0a;
+      }
+      .ct .pr {
+        background: #2563eb;
+        border-color: #2563eb;
+      }
+      .ct .pr:hover {
+        background: #1d4ed8;
+      }
+      .ct button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .bc {
+        display: flex;
+        align-items: flex-end;
+        gap: 2px;
+        height: 280px;
+        padding: 16px 0;
+        border-bottom: 1px solid #1e293b;
+      }
+      .bar {
+        flex: 1;
+        background: #2563eb;
+        border-radius: 3px 3px 0 0;
+        transition:
+          height 0.2s,
+          background 0.2s;
+        min-width: 3px;
+      }
+      .bar.cmp {
+        background: #f59e0b;
+      }
+      .bar.srt {
+        background: #22c55e;
+      }
+      .bar.piv {
+        background: #ef4444;
+      }
+      .ib {
+        margin-top: 18px;
+        padding: 14px;
+        border-radius: 10px;
+        background: #1e293b;
+        font-size: 12px;
+        color: #94a3b8;
+        line-height: 1.7;
+      }
+      .ib strong {
+        color: #e2e8f0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Sorting Visualizer</h1>
+      <p class="sub">Visualisasi algoritma Bubble Sort &amp; Selection Sort</p>
+      <div class="ct">
+        <select id="as">
+          <option value="bubble">Bubble Sort</option>
+          <option value="selection">Selection Sort</option></select
+        ><select id="ss" onchange="ga()">
+          <option value="15">15 Elemen</option>
+          <option value="25" selected>25 Elemen</option>
+          <option value="40">40 Elemen</option></select
+        ><button class="pr" id="sb" onclick="startSort()">Mulai</button
+        ><button onclick="ga()">Acak Ulang</button>
+      </div>
+      <div class="bc" id="bc"></div>
+      <div class="ib">
+        <strong>Bubble Sort:</strong> Bandingkan bersebelahan, swap jika lebih
+        besar. O(n2).<br /><strong>Selection Sort:</strong> Cari terkecil,
+        pindah ke posisi benar. O(n2).<br /><em
+          >Biru=default, Kuning=bandingkan, Merah=pivot, Hijau=selesai</em
+        >
+      </div>
+    </div>
+    <div
+      style="
+        margin-top: 48px;
+        padding: 24px 0;
+        border-top: 1px solid rgba(128, 128, 128, 0.12);
+        text-align: center;
+      "
+    >
+      <a
+        href="../../downloads/sorting-visualizer.zip"
+        download
+        style="
+          display: inline-block;
+          padding: 13px 32px;
+          border-radius: 8px;
+          background: #2563eb;
+          color: #fff;
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: -0.3px;
+        "
+        >Download Source Code (.zip)</a
+      >
+    </div>
+    <script>
+      var arr = [],
+        sorting = false;
+      function ga() {
+        if (sorting) return;
+        var sz = parseInt(document.getElementById("ss").value);
+        arr = [];
+        for (var i = 0; i < sz; i++)
+          arr.push(Math.floor(Math.random() * 220) + 10);
+        rb([], [], -1);
+      }
+      function rb(cL, sL, pI) {
+        var c = document.getElementById("bc");
+        c.innerHTML = "";
+        var mx = Math.max.apply(null, arr);
+        for (var i = 0; i < arr.length; i++) {
+          var b = document.createElement("div");
+          b.className = "bar";
+          if (cL.indexOf(i) !== -1) b.className += " cmp";
+          if (sL.indexOf(i) !== -1) b.className += " srt";
+          if (i === pI) b.className += " piv";
+          b.style.height = Math.max(4, (arr[i] / mx) * 240) + "px";
+          c.appendChild(b);
+        }
+      }
+      function sl(ms) {
+        return new Promise(function (r) {
+          setTimeout(r, ms);
+        });
+      }
+      async function startSort() {
+        if (sorting) return;
+        sorting = true;
+        document.getElementById("sb").disabled = true;
+        var a = document.getElementById("as").value;
+        if (a === "bubble") await bs();
+        else await ses();
+        sorting = false;
+        document.getElementById("sb").disabled = false;
+      }
+      async function bs() {
+        var sr = [];
+        for (var i = 0; i < arr.length - 1; i++) {
+          for (var j = 0; j < arr.length - 1 - i; j++) {
+            rb([j, j + 1], sr, -1);
+            await sl(50);
+            if (arr[j] > arr[j + 1]) {
+              var t = arr[j];
+              arr[j] = arr[j + 1];
+              arr[j + 1] = t;
+            }
+          }
+          sr.push(arr.length - 1 - i);
+        }
+        sr.push(0);
+        rb([], sr, -1);
+      }
+      async function ses() {
+        var sr = [];
+        for (var i = 0; i < arr.length - 1; i++) {
+          var mi = i;
+          for (var j = i + 1; j < arr.length; j++) {
+            rb([j], sr, mi);
+            await sl(50);
+            if (arr[j] < arr[mi]) mi = j;
+          }
+          if (mi !== i) {
+            var t = arr[i];
+            arr[i] = arr[mi];
+            arr[mi] = t;
+          }
+          sr.push(i);
+        }
+        sr.push(arr.length - 1);
+        rb([], sr, -1);
+      }
+      ga();
+    </script>
+  </body>
+</html>
