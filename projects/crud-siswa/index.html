@@ -1,1 +1,333 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>CRUD Data Siswa</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Courier New',monospace;background:#0f172a;color:#e2e8f0;min-height:100vh;padding:32px}.wrap{max-width:750px;margin:0 auto}h1{font-size:22px;font-weight:600;margin-bottom:4px}.sub{color:#64748b;font-size:12px;margin-bottom:20px}.tb{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}.tb input{flex:1;min-width:180px;padding:9px 12px;border-radius:6px;border:1px solid #1e293b;background:#1e293b;color:#e2e8f0;font-family:inherit;font-size:13px;outline:none}.tb input:focus{border-color:#10b981}.tb button{padding:9px 16px;border-radius:6px;border:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:600}.ba{background:#10b981;color:#fff}.ba:hover{background:#059669}table{width:100%;border-collapse:collapse;font-size:12.5px}th{text-align:left;padding:9px;border-bottom:2px solid #1e293b;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:1px}td{padding:8px;border-bottom:1px solid #1e293b}tr:hover td{background:#1e293b}.ab{padding:3px 10px;border-radius:4px;border:none;cursor:pointer;font-size:11px;font-family:inherit;margin-right:3px}.be{background:rgba(16,185,129,.12);color:#10b981}.bd{background:rgba(239,68,68,.12);color:#ef4444}.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center}.mo.show{display:flex}.md{background:#1e293b;padding:24px;border-radius:12px;width:90%;max-width:380px;border:1px solid #334155}.md h3{margin-bottom:14px;font-size:16px}.md .fg{margin-bottom:10px}.md label{display:block;font-size:11px;color:#64748b;margin-bottom:3px}.md input{width:100%;padding:9px 12px;border-radius:6px;border:1px solid #334155;background:#0f172a;color:#e2e8f0;font-family:inherit;font-size:13px;outline:none}.mb{display:flex;gap:8px;margin-top:14px}.mb button{flex:1;padding:9px;border-radius:6px;border:none;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit}.ms{background:#10b981;color:#fff}.mc2{background:#334155;color:#e2e8f0}.empty{text-align:center;color:#475569;padding:32px}</style></head><body><div class="wrap"><h1>CRUD Data Siswa</h1><p class="sub">Sistem kelola data siswa (Demo Frontend)</p><div class="tb"><input id="si" placeholder="Cari nama siswa..." oninput="rt()"><button class="ba" onclick="om()">+ Tambah Siswa</button></div><table><thead><tr><th>No</th><th>Nama</th><th>Kelas</th><th>Jurusan</th><th>Aksi</th></tr></thead><tbody id="tb"></tbody></table><div class="empty" id="em">Belum ada data.</div><div class="mo" id="mo"><div class="md"><h3 id="mt">Tambah Siswa</h3><div class="fg"><label>Nama</label><input id="mn"></div><div class="fg"><label>Kelas</label><input id="mk" placeholder="11 RPL 1"></div><div class="fg"><label>Jurusan</label><input id="mj" placeholder="RPL"></div><div class="mb"><button class="mc2" onclick="cm()">Batal</button><button class="ms" onclick="sd()">Simpan</button></div></div></div></div><div style="margin-top:48px;padding:24px 0;border-top:1px solid rgba(128,128,128,0.12);text-align:center"><a href="../../downloads/crud-siswa.zip" download style="display:inline-block;padding:13px 32px;border-radius:8px;background:#2563eb;color:#fff;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:-0.3px">Download Source Code (.zip)</a></div><script>var d=JSON.parse(localStorage.getItem("rs")||'[{"n":"Rama Juliantara","k":"11 RPL 1","j":"RPL"},{"n":"Budi Santoso","k":"11 RPL 1","j":"RPL"},{"n":"Sari Dewi","k":"11 TKJ 2","j":"TKJ"}]'),ei=-1;function sv(){localStorage.setItem("rs",JSON.stringify(d));}function rt(){var tb=document.getElementById("tb"),em=document.getElementById("em"),q=document.getElementById("si").value.toLowerCase(),f=d.filter(function(x){return x.n.toLowerCase().indexOf(q)!==-1});tb.innerHTML="";if(!f.length){em.style.display="block";return;}em.style.display="none";f.forEach(function(x,i){var idx=d.indexOf(x);tb.innerHTML+="<tr><td>"+(i+1)+"</td><td>"+x.n+"</td><td>"+x.k+"</td><td>"+x.j+"</td><td><button class=\"ab be\" onclick=\"ed("+idx+")\">Edit</button><button class=\"ab bd\" onclick=\"dl("+idx+")\">Hapus</button></td></tr>";});}function om(){ei=-1;document.getElementById("mt").textContent="Tambah Siswa";document.getElementById("mn").value="";document.getElementById("mk").value="";document.getElementById("mj").value="";document.getElementById("mo").classList.add("show");}function cm(){document.getElementById("mo").classList.remove("show");}function ed(i){ei=i;document.getElementById("mt").textContent="Edit Siswa";document.getElementById("mn").value=d[i].n;document.getElementById("mk").value=d[i].k;document.getElementById("mj").value=d[i].j;document.getElementById("mo").classList.add("show");}function sd(){var n=document.getElementById("mn").value.trim(),k=document.getElementById("mk").value.trim(),j=document.getElementById("mj").value.trim();if(!n||!k||!j){alert("Semua field harus diisi!");return;}if(ei===-1)d.push({n:n,k:k,j:j});else d[ei]={n:n,k:k,j:j};sv();rt();cm();}function dl(i){if(confirm("Hapus "+d[i].n+"?")){d.splice(i,1);sv();rt();}}rt();</script></body></html>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>CRUD Data Siswa</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Courier New", monospace;
+        background: #0f172a;
+        color: #e2e8f0;
+        min-height: 100vh;
+        padding: 32px;
+      }
+      .wrap {
+        max-width: 750px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .sub {
+        color: #64748b;
+        font-size: 12px;
+        margin-bottom: 20px;
+      }
+      .tb {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+      .tb input {
+        flex: 1;
+        min-width: 180px;
+        padding: 9px 12px;
+        border-radius: 6px;
+        border: 1px solid #1e293b;
+        background: #1e293b;
+        color: #e2e8f0;
+        font-family: inherit;
+        font-size: 13px;
+        outline: none;
+      }
+      .tb input:focus {
+        border-color: #10b981;
+      }
+      .tb button {
+        padding: 9px 16px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .ba {
+        background: #10b981;
+        color: #fff;
+      }
+      .ba:hover {
+        background: #059669;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12.5px;
+      }
+      th {
+        text-align: left;
+        padding: 9px;
+        border-bottom: 2px solid #1e293b;
+        color: #64748b;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      td {
+        padding: 8px;
+        border-bottom: 1px solid #1e293b;
+      }
+      tr:hover td {
+        background: #1e293b;
+      }
+      .ab {
+        padding: 3px 10px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        font-size: 11px;
+        font-family: inherit;
+        margin-right: 3px;
+      }
+      .be {
+        background: rgba(16, 185, 129, 0.12);
+        color: #10b981;
+      }
+      .bd {
+        background: rgba(239, 68, 68, 0.12);
+        color: #ef4444;
+      }
+      .mo {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 999;
+        align-items: center;
+        justify-content: center;
+      }
+      .mo.show {
+        display: flex;
+      }
+      .md {
+        background: #1e293b;
+        padding: 24px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 380px;
+        border: 1px solid #334155;
+      }
+      .md h3 {
+        margin-bottom: 14px;
+        font-size: 16px;
+      }
+      .md .fg {
+        margin-bottom: 10px;
+      }
+      .md label {
+        display: block;
+        font-size: 11px;
+        color: #64748b;
+        margin-bottom: 3px;
+      }
+      .md input {
+        width: 100%;
+        padding: 9px 12px;
+        border-radius: 6px;
+        border: 1px solid #334155;
+        background: #0f172a;
+        color: #e2e8f0;
+        font-family: inherit;
+        font-size: 13px;
+        outline: none;
+      }
+      .mb {
+        display: flex;
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .mb button {
+        flex: 1;
+        padding: 9px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: inherit;
+      }
+      .ms {
+        background: #10b981;
+        color: #fff;
+      }
+      .mc2 {
+        background: #334155;
+        color: #e2e8f0;
+      }
+      .empty {
+        text-align: center;
+        color: #475569;
+        padding: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>CRUD Data Siswa</h1>
+      <p class="sub">Sistem kelola data siswa (Demo Frontend)</p>
+      <div class="tb">
+        <input id="si" placeholder="Cari nama siswa..." oninput="rt()" /><button
+          class="ba"
+          onclick="om()"
+        >
+          + Tambah Siswa
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>Jurusan</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="tb"></tbody>
+      </table>
+      <div class="empty" id="em">Belum ada data.</div>
+      <div class="mo" id="mo">
+        <div class="md">
+          <h3 id="mt">Tambah Siswa</h3>
+          <div class="fg"><label>Nama</label><input id="mn" /></div>
+          <div class="fg">
+            <label>Kelas</label><input id="mk" placeholder="11 RPL 1" />
+          </div>
+          <div class="fg">
+            <label>Jurusan</label><input id="mj" placeholder="RPL" />
+          </div>
+          <div class="mb">
+            <button class="mc2" onclick="cm()">Batal</button
+            ><button class="ms" onclick="sd()">Simpan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      style="
+        margin-top: 48px;
+        padding: 24px 0;
+        border-top: 1px solid rgba(128, 128, 128, 0.12);
+        text-align: center;
+      "
+    >
+      <a
+        href="../../downloads/crud-siswa.zip"
+        download
+        style="
+          display: inline-block;
+          padding: 13px 32px;
+          border-radius: 8px;
+          background: #2563eb;
+          color: #fff;
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: -0.3px;
+        "
+        >Download Source Code (.zip)</a
+      >
+    </div>
+    <script>
+      var d = JSON.parse(
+          localStorage.getItem("rs") ||
+            '[{"n":"Rama Juliantara","k":"11 RPL 1","j":"RPL"},{"n":"Budi Santoso","k":"11 RPL 1","j":"RPL"},{"n":"Sari Dewi","k":"11 TKJ 2","j":"TKJ"}]',
+        ),
+        ei = -1;
+      function sv() {
+        localStorage.setItem("rs", JSON.stringify(d));
+      }
+      function rt() {
+        var tb = document.getElementById("tb"),
+          em = document.getElementById("em"),
+          q = document.getElementById("si").value.toLowerCase(),
+          f = d.filter(function (x) {
+            return x.n.toLowerCase().indexOf(q) !== -1;
+          });
+        tb.innerHTML = "";
+        if (!f.length) {
+          em.style.display = "block";
+          return;
+        }
+        em.style.display = "none";
+        f.forEach(function (x, i) {
+          var idx = d.indexOf(x);
+          tb.innerHTML +=
+            "<tr><td>" +
+            (i + 1) +
+            "</td><td>" +
+            x.n +
+            "</td><td>" +
+            x.k +
+            "</td><td>" +
+            x.j +
+            '</td><td><button class="ab be" onclick="ed(' +
+            idx +
+            ')">Edit</button><button class="ab bd" onclick="dl(' +
+            idx +
+            ')">Hapus</button></td></tr>';
+        });
+      }
+      function om() {
+        ei = -1;
+        document.getElementById("mt").textContent = "Tambah Siswa";
+        document.getElementById("mn").value = "";
+        document.getElementById("mk").value = "";
+        document.getElementById("mj").value = "";
+        document.getElementById("mo").classList.add("show");
+      }
+      function cm() {
+        document.getElementById("mo").classList.remove("show");
+      }
+      function ed(i) {
+        ei = i;
+        document.getElementById("mt").textContent = "Edit Siswa";
+        document.getElementById("mn").value = d[i].n;
+        document.getElementById("mk").value = d[i].k;
+        document.getElementById("mj").value = d[i].j;
+        document.getElementById("mo").classList.add("show");
+      }
+      function sd() {
+        var n = document.getElementById("mn").value.trim(),
+          k = document.getElementById("mk").value.trim(),
+          j = document.getElementById("mj").value.trim();
+        if (!n || !k || !j) {
+          alert("Semua field harus diisi!");
+          return;
+        }
+        if (ei === -1) d.push({ n: n, k: k, j: j });
+        else d[ei] = { n: n, k: k, j: j };
+        sv();
+        rt();
+        cm();
+      }
+      function dl(i) {
+        if (confirm("Hapus " + d[i].n + "?")) {
+          d.splice(i, 1);
+          sv();
+          rt();
+        }
+      }
+      rt();
+    </script>
+  </body>
+</html>
