@@ -1,113 +1,771 @@
-<!DOCTYPE html>
-<html lang="id"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Rama Juliantara - Portofolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',system-ui,sans-serif;background:#06060e;color:#fff;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#06060e}::-webkit-scrollbar-thumb{background:#222;border-radius:3px}
-.orb{position:fixed;border-radius:50%;filter:blur(110px);opacity:.1;pointer-events:none;z-index:0}
-.o1{width:550px;height:550px;background:#3b82f6;top:-180px;right:-120px;animation:f1 24s ease-in-out infinite}
-.o2{width:400px;height:400px;background:#8b5cf6;bottom:-80px;left:-80px;animation:f2 30s ease-in-out infinite}
-@keyframes f1{0%,100%{transform:translate(0,0)}50%{transform:translate(-100px,100px)}}
-@keyframes f2{0%,100%{transform:translate(0,0)}50%{transform:translate(80px,-80px)}}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 32px;display:flex;justify-content:space-between;align-items:center;background:rgba(6,6,14,.75);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.03)}
-.logo{font-size:17px;font-weight:600;letter-spacing:-.5px}.logo span{color:#60a5fa}
-.nav-links{display:flex;gap:22px}.nav-links a{font-size:12.5px;color:#525252;transition:color .3s}.nav-links a:hover{color:#fff}
-.hero{min-height:100vh;display:flex;align-items:center;padding:120px 32px 80px;position:relative;z-index:1}
-.hi{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:44px;width:100%}
-.hphoto{flex-shrink:0}
-.hphoto img{width:220px;height:220px;border-radius:50%;border:3px solid rgba(96,165,250,.25);object-fit:cover}
-.htxt h1{font-size:clamp(30px,5vw,52px);font-weight:600;line-height:1;letter-spacing:-2px;margin-bottom:8px}
-.htxt h1 .g{background:linear-gradient(135deg,#60a5fa,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:100px;background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.12);font-size:11px;font-weight:500;color:#60a5fa;margin-bottom:14px;letter-spacing:.5px}
-.htxt p{font-size:14.5px;color:#737373;max-width:480px;line-height:1.7;margin-bottom:22px;font-weight:300}
-.hbtns{display:flex;gap:10px;flex-wrap:wrap}
-.bp{padding:10px 22px;border-radius:8px;background:#2563eb;color:#fff;font-size:13px;font-weight:500;border:none;cursor:pointer;transition:all .3s}
-.bp:hover{background:#1d4ed8;transform:translateY(-2px)}
-.bs{padding:10px 22px;border-radius:8px;background:rgba(255,255,255,.03);color:#fff;font-size:13px;font-weight:500;border:1px solid rgba(255,255,255,.07);cursor:pointer;transition:all .3s}
-.bs:hover{background:rgba(255,255,255,.07);transform:translateY(-2px)}
-.soc{display:flex;gap:10px;margin-top:18px}
-.soc a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:13px;color:#737373;transition:all .3s}
-.soc a:hover{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.15);color:#60a5fa}
-section{padding:60px 32px;max-width:1100px;margin:0 auto;position:relative;z-index:1}
-.sl{font-size:10.5px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#60a5fa;margin-bottom:8px}
-.st{font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-.8px;margin-bottom:28px}
-.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:8px}
-.sk{padding:13px 14px;border-radius:9px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);font-size:12.5px;font-weight:500;text-align:center;transition:all .3s}
-.sk:hover{background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.15);transform:translateY(-2px);color:#60a5fa}
-.filters{display:flex;gap:7px;margin-bottom:20px;flex-wrap:wrap}
-.fb{padding:6px 14px;border-radius:100px;border:1px solid rgba(255,255,255,.07);background:transparent;color:#737373;font-size:11.5px;font-weight:500;cursor:pointer;transition:all .3s}
-.fb.active,.fb:hover{background:#2563eb;border-color:#2563eb;color:#fff}
-.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
-.pc{position:relative;padding:26px;border-radius:13px;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.04);overflow:hidden;transition:all .4s}
-.pc:hover{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08);transform:translateY(-3px)}
-.pc .pn{position:absolute;top:-12px;right:8px;font-size:76px;font-weight:700;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
-.pc h3{font-size:15.5px;font-weight:600;margin-bottom:5px;letter-spacing:-.3px}
-.pc p{font-size:12px;color:#525252;line-height:1.6;margin-bottom:11px}
-.pc .tg{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px}
-.pc .tg span{padding:2px 8px;border-radius:5px;background:rgba(59,130,246,.07);color:#60a5fa;font-size:10px;font-weight:500}
-.pc .pa{display:flex;gap:7px}
-.pc .pa a{flex:1;text-align:center;padding:8px 0;border-radius:7px;font-size:11.5px;font-weight:500;transition:all .3s}
-.pc .bd{background:rgba(59,130,246,.08);color:#60a5fa;border:1px solid rgba(59,130,246,.12)}
-.pc .bd:hover{background:rgba(59,130,246,.15)}
-.pc .bsc{background:rgba(255,255,255,.03);color:#737373;border:1px solid rgba(255,255,255,.05)}
-.pc .bsc:hover{background:rgba(255,255,255,.06);color:#fff}
-.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.ci{padding:16px;border-radius:11px;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.04);transition:all .3s}
-.ci:hover{background:rgba(255,255,255,.03);transform:translateY(-2px)}
-.ci .cx{font-size:18px;margin-bottom:6px}
-.ci .cl{font-size:9.5px;color:#525252;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
-.ci .cv{font-size:12.5px;font-weight:500}
-.ci a.cv{color:#60a5fa}
-footer{padding:26px 32px;text-align:center;border-top:1px solid rgba(255,255,255,.03);color:#404040;font-size:11.5px;position:relative;z-index:1}
-@media(max-width:768px){.hi{flex-direction:column;text-align:center}.htxt p{margin:0 auto 22px}.hbtns{justify-content:center}.soc{justify-content:center}.nav-links{display:none}.pg{grid-template-columns:1fr}section{padding:40px 18px}}
-</style></head><body>
-<div class="orb o1"></div><div class="orb o2"></div>
-<nav><div class="logo">rama<span>.dev</span></div><div class="nav-links"><a href="#about">Tentang</a><a href="#skills">Skill</a><a href="#projects">Proyek</a><a href="#contact">Kontak</a></div></nav>
-<div class="hero" id="about"><div class="hi">
-<div class="hphoto"><img src="assets/foto.png" alt="Rama Juliantara"></div>
-<div class="htxt">
-<div class="badge">SMKN 1 Denpasar &mdash; Kelas 11 RPL</div>
-<h1>Halo, Saya<br><span class="g">Rama Juliantara</span></h1>
-<p>Siswa SMKN 1 Denpasar yang memiliki ketertarikan di bidang pengembangan web dan pemrograman. Aktif membangun berbagai proyek untuk mengasah kemampuan teknis, mulai dari frontend, backend PHP, hingga Python.</p>
-<div class="hbtns"><a href="#projects" class="bp">Lihat Proyek Saya</a><a href="#contact" class="bs">Hubungi Saya</a></div>
-<div class="soc">
-<a href="https://github.com/renoldvand" target="_blank" title="GitHub">GH</a>
-<a href="https://www.instagram.com/raajuull_/" target="_blank" title="Instagram">IG</a>
-<a href="mailto:ramajuliantara2207@gmail.com" title="Email">EM</a>
-<a href="https://wa.me/62895342600823" target="_blank" title="WhatsApp">WA</a>
-</div>
-</div></div></div>
-<section id="skills"><div class="sl">Keahlian</div><div class="st">Skill &amp; Teknologi</div>
-<div class="sg"><div class="sk">HTML</div><div class="sk">CSS</div><div class="sk">JavaScript</div><div class="sk">PHP</div><div class="sk">MySQL</div><div class="sk">Python</div><div class="sk">Git</div><div class="sk">Responsive</div><div class="sk">DOM</div><div class="sk">Bootstrap</div><div class="sk">Session</div><div class="sk">CRUD</div></div></section>
-<section id="projects"><div class="sl">Proyek</div><div class="st">Semua Proyek Saya</div>
-<div class="filters"><button class="fb active" onclick="ft('all',this)">Semua</button><button class="fb" onclick="ft('frontend',this)">Frontend</button><button class="fb" onclick="ft('backend',this)">Backend</button><button class="fb" onclick="ft('python',this)">Python</button></div>
-<div class="pg" id="pgrid">
-<div class="pc" data-cat="frontend"><div class="pn">01</div><h3>Website Cafe</h3><p>Landing page cafe dengan menu section, contact form, dan desain responsive elegan.</p><div class="tg"><span>HTML</span><span>CSS</span><span>JavaScript</span></div><div class="pa"><a href="projects/cafe/" class="bd">Live Demo</a><a href="downloads/website-cafe.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="frontend"><div class="pn">02</div><h3>To Do List App</h3><p>Aplikasi manajemen tugas dengan tambah, hapus, checklist, dan penyimpanan otomatis.</p><div class="tg"><span>JavaScript</span><span>DOM</span><span>LocalStorage</span></div><div class="pa"><a href="projects/todo/" class="bd">Live Demo</a><a href="downloads/todo-list.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="backend"><div class="pn">03</div><h3>Login &amp; Register</h3><p>Sistem autentikasi PHP + MySQL + Session. Halaman login dan register terpisah.</p><div class="tg"><span>PHP</span><span>MySQL</span><span>Session</span></div><div class="pa"><a href="projects/login-register/" class="bd">Live Demo</a><a href="downloads/login-register.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="backend"><div class="pn">04</div><h3>CRUD Data Siswa</h3><p>Sistem kelola data siswa: tambah, edit, hapus, dan cari. PHP + MySQL.</p><div class="tg"><span>PHP</span><span>MySQL</span><span>CRUD</span></div><div class="pa"><a href="projects/crud-siswa/" class="bd">Live Demo</a><a href="downloads/crud-siswa.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="python"><div class="pn">05</div><h3>Sorting Visualizer</h3><p>Visualisasi algoritma Bubble Sort dan Selection Sort langkah demi langkah.</p><div class="tg"><span>Python</span><span>Algorithm</span></div><div class="pa"><a href="projects/sorting-visualizer/" class="bd">Live Demo</a><a href="downloads/sorting-visualizer.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="python"><div class="pn">06</div><h3>Calculator</h3><p>Kalkulator dengan operasi matematika dasar dan tampilan yang bersih.</p><div class="tg"><span>Python</span><span>Math</span></div><div class="pa"><a href="projects/calculator/" class="bd">Live Demo</a><a href="downloads/calculator.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="python"><div class="pn">07</div><h3>Sistem Kasir</h3><p>Aplikasi kasir sederhana: input barang, hitung total, dan cetak struk.</p><div class="tg"><span>Python</span><span>Logic</span></div><div class="pa"><a href="projects/kasir/" class="bd">Live Demo</a><a href="downloads/sistem-kasir.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="frontend"><div class="pn">08</div><h3>Weather App</h3><p>Aplikasi cuaca yang menampilkan informasi suhu, kelembapan, dan angin.</p><div class="tg"><span>HTML</span><span>CSS</span><span>JavaScript</span></div><div class="pa"><a href="projects/weather-app/" class="bd">Live Demo</a><a href="downloads/weather-app.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="frontend"><div class="pn">09</div><h3>Quiz App</h3><p>Kuis pemrograman interaktif dengan 10 soal, skor, dan feedback per jawaban.</p><div class="tg"><span>HTML</span><span>JavaScript</span></div><div class="pa"><a href="projects/quiz-app/" class="bd">Live Demo</a><a href="downloads/quiz-app.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="frontend"><div class="pn">10</div><h3>Stopwatch</h3><p>Stopwatch digital dengan fitur start, stop, reset, dan lap time.</p><div class="tg"><span>HTML</span><span>CSS</span><span>JavaScript</span></div><div class="pa"><a href="projects/stopwatch/" class="bd">Live Demo</a><a href="downloads/stopwatch.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="frontend"><div class="pn">11</div><h3>Password Generator</h3><p>Generator password acak dengan pilihan panjang, karakter, dan indikator kekuatan.</p><div class="tg"><span>JavaScript</span><span>Security</span></div><div class="pa"><a href="projects/password-generator/" class="bd">Live Demo</a><a href="downloads/password-generator.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="frontend"><div class="pn">12</div><h3>BMI Calculator</h3><p>Kalkulator Indeks Massa Tubuh dengan visualisasi bar dan interpretasi hasil.</p><div class="tg"><span>HTML</span><span>JavaScript</span></div><div class="pa"><a href="projects/bmi-calculator/" class="bd">Live Demo</a><a href="downloads/bmi-calculator.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="frontend"><div class="pn">13</div><h3>Notes App</h3><p>Aplikasi catatan dengan tambah, edit, hapus, warna acak, dan simpan otomatis.</p><div class="tg"><span>JavaScript</span><span>LocalStorage</span></div><div class="pa"><a href="projects/notes-app/" class="bd">Live Demo</a><a href="downloads/notes-app.zip" class="bsc">Source Code</a></div></div>
-<div class="pc" data-cat="frontend"><div class="pn">14</div><h3>Image Gallery</h3><p>Galeri foto dengan layout grid, lightbox, dan navigasi keyboard.</p><div class="tg"><span>HTML</span><span>CSS</span><span>JavaScript</span></div><div class="pa"><a href="projects/image-gallery/" class="bd">Live Demo</a><a href="downloads/image-gallery.zip" class="bsc">Source Code</a></div></div>
-</div></section>
-<section id="contact"><div class="sl">Kontak</div><div class="st">Hubungi Saya</div>
-<div class="cg">
-<a href="mailto:ramajuliantara2207@gmail.com" class="ci"><div class="cx">@</div><div class="cl">Email</div><div class="cv">ramajuliantara2207@gmail.com</div></a>
-<a href="https://wa.me/62895342600823" target="_blank" class="ci"><div class="cx">#</div><div class="cl">WhatsApp</div><div class="cv">0895-3426-00823</div></a>
-<a href="https://www.instagram.com/raajuull_/" target="_blank" class="ci"><div class="cx">.</div><div class="cl">Instagram</div><div class="cv">@raajuull_</div></a>
-<a href="https://github.com/renoldvand" target="_blank" class="ci"><div class="cx">/</div><div class="cl">GitHub</div><div class="cv">renoldvand</div></a>
-</div></section>
-<footer>2025 Rama Juliantara &mdash; SMKN 1 Denpasar</footer>
-<script>function ft(c,b){document.querySelectorAll('.fb').forEach(function(x){x.classList.remove('active')});b.classList.add('active');document.querySelectorAll('.pc').forEach(function(x){x.style.display=(c==='all'||x.dataset.cat===c)?'':'none';});}</script>
-</body></html>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Rama Juliantara - Portofolio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: #06060e;
+        color: #fff;
+        overflow-x: hidden;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #06060e;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #222;
+        border-radius: 3px;
+      }
+      .orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(110px);
+        opacity: 0.1;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .o1 {
+        width: 550px;
+        height: 550px;
+        background: #3b82f6;
+        top: -180px;
+        right: -120px;
+        animation: f1 24s ease-in-out infinite;
+      }
+      .o2 {
+        width: 400px;
+        height: 400px;
+        background: #8b5cf6;
+        bottom: -80px;
+        left: -80px;
+        animation: f2 30s ease-in-out infinite;
+      }
+      @keyframes f1 {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(-100px, 100px);
+        }
+      }
+      @keyframes f2 {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(80px, -80px);
+        }
+      }
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 14px 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(6, 6, 14, 0.75);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      }
+      .logo {
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+      }
+      .logo span {
+        color: #60a5fa;
+      }
+      .nav-links {
+        display: flex;
+        gap: 22px;
+      }
+      .nav-links a {
+        font-size: 12.5px;
+        color: #525252;
+        transition: color 0.3s;
+      }
+      .nav-links a:hover {
+        color: #fff;
+      }
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 120px 32px 80px;
+        position: relative;
+        z-index: 1;
+      }
+      .hi {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 44px;
+        width: 100%;
+      }
+      .hphoto {
+        flex-shrink: 0;
+      }
+      .hphoto img {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        border: 3px solid rgba(96, 165, 250, 0.25);
+        object-fit: cover;
+      }
+      .htxt h1 {
+        font-size: clamp(30px, 5vw, 52px);
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: -2px;
+        margin-bottom: 8px;
+      }
+      .htxt h1 .g {
+        background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 14px;
+        border-radius: 100px;
+        background: rgba(96, 165, 250, 0.07);
+        border: 1px solid rgba(96, 165, 250, 0.12);
+        font-size: 11px;
+        font-weight: 500;
+        color: #60a5fa;
+        margin-bottom: 14px;
+        letter-spacing: 0.5px;
+      }
+      .htxt p {
+        font-size: 14.5px;
+        color: #737373;
+        max-width: 480px;
+        line-height: 1.7;
+        margin-bottom: 22px;
+        font-weight: 300;
+      }
+      .hbtns {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .bp {
+        padding: 10px 22px;
+        border-radius: 8px;
+        background: #2563eb;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .bp:hover {
+        background: #1d4ed8;
+        transform: translateY(-2px);
+      }
+      .bs {
+        padding: 10px 22px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.03);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 500;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .bs:hover {
+        background: rgba(255, 255, 255, 0.07);
+        transform: translateY(-2px);
+      }
+      .soc {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .soc a {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        color: #737373;
+        transition: all 0.3s;
+      }
+      .soc a:hover {
+        background: rgba(59, 130, 246, 0.08);
+        border-color: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+      }
+      section {
+        padding: 60px 32px;
+        max-width: 1100px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+      .sl {
+        font-size: 10.5px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 8px;
+      }
+      .st {
+        font-size: clamp(22px, 3vw, 32px);
+        font-weight: 600;
+        letter-spacing: -0.8px;
+        margin-bottom: 28px;
+      }
+      .sg {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+        gap: 8px;
+      }
+      .sk {
+        padding: 13px 14px;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        font-size: 12.5px;
+        font-weight: 500;
+        text-align: center;
+        transition: all 0.3s;
+      }
+      .sk:hover {
+        background: rgba(59, 130, 246, 0.06);
+        border-color: rgba(59, 130, 246, 0.15);
+        transform: translateY(-2px);
+        color: #60a5fa;
+      }
+      .filters {
+        display: flex;
+        gap: 7px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      .fb {
+        padding: 6px 14px;
+        border-radius: 100px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        background: transparent;
+        color: #737373;
+        font-size: 11.5px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .fb.active,
+      .fb:hover {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: #fff;
+      }
+      .pg {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 14px;
+      }
+      .pc {
+        position: relative;
+        padding: 26px;
+        border-radius: 13px;
+        background: rgba(255, 255, 255, 0.015);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        overflow: hidden;
+        transition: all 0.4s;
+      }
+      .pc:hover {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: rgba(255, 255, 255, 0.08);
+        transform: translateY(-3px);
+      }
+      .pc .pn {
+        position: absolute;
+        top: -12px;
+        right: 8px;
+        font-size: 76px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.025);
+        line-height: 1;
+        pointer-events: none;
+      }
+      .pc h3 {
+        font-size: 15.5px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        letter-spacing: -0.3px;
+      }
+      .pc p {
+        font-size: 12px;
+        color: #525252;
+        line-height: 1.6;
+        margin-bottom: 11px;
+      }
+      .pc .tg {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 14px;
+      }
+      .pc .tg span {
+        padding: 2px 8px;
+        border-radius: 5px;
+        background: rgba(59, 130, 246, 0.07);
+        color: #60a5fa;
+        font-size: 10px;
+        font-weight: 500;
+      }
+      .pc .pa {
+        display: flex;
+        gap: 7px;
+      }
+      .pc .pa a {
+        flex: 1;
+        text-align: center;
+        padding: 8px 0;
+        border-radius: 7px;
+        font-size: 11.5px;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .pc .bd {
+        background: rgba(59, 130, 246, 0.08);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.12);
+      }
+      .pc .bd:hover {
+        background: rgba(59, 130, 246, 0.15);
+      }
+      .pc .bsc {
+        background: rgba(255, 255, 255, 0.03);
+        color: #737373;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .pc .bsc:hover {
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+      }
+      .cg {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 12px;
+      }
+      .ci {
+        padding: 16px;
+        border-radius: 11px;
+        background: rgba(255, 255, 255, 0.015);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        transition: all 0.3s;
+      }
+      .ci:hover {
+        background: rgba(255, 255, 255, 0.03);
+        transform: translateY(-2px);
+      }
+      .ci .cx {
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+      .ci .cl {
+        font-size: 9.5px;
+        color: #525252;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 2px;
+      }
+      .ci .cv {
+        font-size: 12.5px;
+        font-weight: 500;
+      }
+      .ci a.cv {
+        color: #60a5fa;
+      }
+      footer {
+        padding: 26px 32px;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.03);
+        color: #404040;
+        font-size: 11.5px;
+        position: relative;
+        z-index: 1;
+      }
+      @media (max-width: 768px) {
+        .hi {
+          flex-direction: column;
+          text-align: center;
+        }
+        .htxt p {
+          margin: 0 auto 22px;
+        }
+        .hbtns {
+          justify-content: center;
+        }
+        .soc {
+          justify-content: center;
+        }
+        .nav-links {
+          display: none;
+        }
+        .pg {
+          grid-template-columns: 1fr;
+        }
+        section {
+          padding: 40px 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <nav>
+      <div class="logo">rama<span>.dev</span></div>
+      <div class="nav-links">
+        <a href="#about">Tentang</a><a href="#skills">Skill</a
+        ><a href="#projects">Proyek</a><a href="#contact">Kontak</a>
+      </div>
+    </nav>
+    <div class="hero" id="about">
+      <div class="hi">
+        <div class="hphoto">
+          <img src="assets/foto.png" alt="Rama Juliantara" />
+        </div>
+        <div class="htxt">
+          <div class="badge">SMKN 1 Denpasar &mdash; Kelas 11 RPL</div>
+          <h1>Halo, Saya<br /><span class="g">Rama Juliantara</span></h1>
+          <p>
+            Siswa SMKN 1 Denpasar yang memiliki ketertarikan di bidang
+            pengembangan web dan pemrograman. Aktif membangun berbagai proyek
+            untuk mengasah kemampuan teknis, mulai dari frontend, backend PHP,
+            hingga Python.
+          </p>
+          <div class="hbtns">
+            <a href="#projects" class="bp">Lihat Proyek Saya</a
+            ><a href="#contact" class="bs">Hubungi Saya</a>
+          </div>
+          <div class="soc">
+            <a
+              href="https://github.com/renoldvand"
+              target="_blank"
+              title="GitHub"
+              >GH</a
+            >
+            <a
+              href="https://www.instagram.com/raajuull_/"
+              target="_blank"
+              title="Instagram"
+              >IG</a
+            >
+            <a href="mailto:ramajuliantara2207@gmail.com" title="Email">EM</a>
+            <a
+              href="https://wa.me/62895342600823"
+              target="_blank"
+              title="WhatsApp"
+              >WA</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <section id="skills">
+      <div class="sl">Keahlian</div>
+      <div class="st">Skill &amp; Teknologi</div>
+      <div class="sg">
+        <div class="sk">HTML</div>
+        <div class="sk">CSS</div>
+        <div class="sk">JavaScript</div>
+        <div class="sk">PHP</div>
+        <div class="sk">MySQL</div>
+        <div class="sk">Python</div>
+        <div class="sk">Git</div>
+        <div class="sk">Responsive</div>
+        <div class="sk">DOM</div>
+        <div class="sk">Bootstrap</div>
+        <div class="sk">Session</div>
+        <div class="sk">CRUD</div>
+      </div>
+    </section>
+    <section id="projects">
+      <div class="sl">Proyek</div>
+      <div class="st">Semua Proyek Saya</div>
+      <div class="filters">
+        <button class="fb active" onclick="ft('all', this)">Semua</button
+        ><button class="fb" onclick="ft('frontend', this)">Frontend</button
+        ><button class="fb" onclick="ft('backend', this)">Backend</button
+        ><button class="fb" onclick="ft('python', this)">Python</button>
+      </div>
+      <div class="pg" id="pgrid">
+        <div class="pc" data-cat="frontend">
+          <div class="pn">01</div>
+          <h3>Website Cafe</h3>
+          <p>
+            Landing page cafe dengan menu section, contact form, dan desain
+            responsive elegan.
+          </p>
+          <div class="tg">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+          </div>
+          <div class="pa">
+            <a href="projects/cafe/" class="bd">Live Demo</a
+            ><a href="downloads/website-cafe.zip" class="bsc">Source Code</a>
+          </div>
+        </div>
+        <div class="pc" data-cat="frontend">
+          <div class="pn">02</div>
+          <h3>To Do List App</h3>
+          <p>
+            Aplikasi manajemen tugas dengan tambah, hapus, checklist, dan
+            penyimpanan otomatis.
+          </p>
+          <div class="tg">
+            <span>JavaScript</span><span>DOM</span><span>LocalStorage</span>
+          </div>
+          <div class="pa">
+            <a href="projects/todo/" class="bd">Live Demo</a
+            ><a href="downloads/todo-list.zip" class="bsc">Source Code</a>
+          </div>
+        </div>
+        <div class="pc" data-cat="backend">
+          <div class="pn">03</div>
+          <h3>Login &amp; Register</h3>
+          <p>
+            Sistem autentikasi PHP + MySQL + Session. Halaman login dan register
+            terpisah.
+          </p>
+          <div class="tg">
+            <span>PHP</span><span>MySQL</span><span>Session</span>
+          </div>
+          <div class="pa">
+            <a href="projects/login-register/" class="bd">Live Demo</a
+            ><a href="downloads/login-register.zip" class="bsc">Source Code</a>
+          </div>
+        </div>
+        <div class="pc" data-cat="backend">
+          <div class="pn">04</div>
+          <h3>CRUD Data Siswa</h3>
+          <p>
+            Sistem kelola data siswa: tambah, edit, hapus, dan cari. PHP +
+            MySQL.
+          </p>
+          <div class="tg">
+            <span>PHP</span><span>MySQL</span><span>CRUD</span>
+          </div>
+          <div class="pa">
+            <a href="projects/crud-siswa/" class="bd">Live Demo</a
+            ><a href="downloads/crud-siswa.zip" class="bsc">Source Code</a>
+          </div>
+        </div>
+        <div class="pc" data-cat="python">
+          <div class="pn">05</div>
+          <h3>Sorting Visualizer</h3>
+          <p>
+            Visualisasi algoritma Bubble Sort dan Selection Sort langkah demi
+            langkah.
+          </p>
+          <div class="tg"><span>Python</span><span>Algorithm</span></div>
+          <div class="pa">
+            <a href="projects/sorting-visualizer/" class="bd">Live Demo</a
+            ><a href="downloads/sorting-visualizer.zip" class="bsc"
+              >Source Code</a
+            >
+          </div>
+        </div>
+        <div class="pc" data-cat="python">
+          <div class="pn">06</div>
+          <h3>Calculator</h3>
+          <p>
+            Kalkulator dengan operasi matematika dasar dan tampilan yang bersih.
+          </p>
+          <div class="tg"><span>Python</span><span>Math</span></div>
+          <div class="pa">
+            <a href="projects/calculator/" class="bd">Live Demo</a
+            ><a href="downloads/calculator.zip" class="bsc">Source Code</a>
+          </div>
+        </div>
+        <div class="pc" data-cat="python">
+          <div class="pn">07</div>
+          <h3>Sistem Kasir</h3>
+          <p>
+            Aplikasi kasir sederhana: input barang, hitung total, dan cetak
+            struk.
+          </p>
+          <div class="tg"><span>Python</span><span>Logic</span></div>
+          <div class="pa">
+            <a href="projects/kasir/" class="bd">Live Demo</a
+            ><a href="downloads/sistem-kasir.zip" class="bsc">Source Code</a>
+          </div>
+        </div>
+        <div class="pc" data-cat="frontend">
+          <div class="pn">08</div>
+          <h3>Weather App</h3>
+          <p>
+            Aplikasi cuaca yang menampilkan informasi suhu, kelembapan, dan
+            angin.
+          </p>
+          <div class="tg">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+          </div>
+          <div class="pa">
+            <a href="projects/weather-app/" class="bd">Live Demo</a
+            ><a href="downloads/weather-app.zip" class="bsc">Source Code</a>
+          </div>
+        </div>
+        <div class="pc" data-cat="frontend">
+          <div class="pn">09</div>
+          <h3>Quiz App</h3>
+          <p>
+            Kuis pemrograman interaktif dengan 10 soal, skor, dan feedback per
+            jawaban.
+          </p>
+          <div class="tg"><span>HTML</span><span>JavaScript</span></div>
+          <div class="pa">
+            <a href="projects/quiz-app/" class="bd">Live Demo</a
+            ><a href="downloads/quiz-app.zip" class="bsc">Source Code</a>
+          </div>
+        </div>
+        <div class="pc" data-cat="frontend">
+          <div class="pn">10</div>
+          <h3>Stopwatch</h3>
+          <p>
+            Stopwatch digital dengan fitur start, stop, reset, dan lap time.
+          </p>
+          <div class="tg">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+          </div>
+          <div class="pa">
+            <a href="projects/stopwatch/" class="bd">Live Demo</a
+            ><a href="downloads/stopwatch.zip" class="bsc">Source Code</a>
+          </div>
+        </div>
+        <div class="pc" data-cat="frontend">
+          <div class="pn">11</div>
+          <h3>Password Generator</h3>
+          <p>
+            Generator password acak dengan pilihan panjang, karakter, dan
+            indikator kekuatan.
+          </p>
+          <div class="tg"><span>JavaScript</span><span>Security</span></div>
+          <div class="pa">
+            <a href="projects/password-generator/" class="bd">Live Demo</a
+            ><a href="downloads/password-generator.zip" class="bsc"
+              >Source Code</a
+            >
+          </div>
+        </div>
+        <div class="pc" data-cat="frontend">
+          <div class="pn">12</div>
+          <h3>BMI Calculator</h3>
+          <p>
+            Kalkulator Indeks Massa Tubuh dengan visualisasi bar dan
+            interpretasi hasil.
+          </p>
+          <div class="tg"><span>HTML</span><span>JavaScript</span></div>
+          <div class="pa">
+            <a href="projects/bmi-calculator/" class="bd">Live Demo</a
+            ><a href="downloads/bmi-calculator.zip" class="bsc">Source Code</a>
+          </div>
+        </div>
+        <div class="pc" data-cat="frontend">
+          <div class="pn">13</div>
+          <h3>Notes App</h3>
+          <p>
+            Aplikasi catatan dengan tambah, edit, hapus, warna acak, dan simpan
+            otomatis.
+          </p>
+          <div class="tg"><span>JavaScript</span><span>LocalStorage</span></div>
+          <div class="pa">
+            <a href="projects/notes-app/" class="bd">Live Demo</a
+            ><a href="downloads/notes-app.zip" class="bsc">Source Code</a>
+          </div>
+        </div>
+        <div class="pc" data-cat="frontend">
+          <div class="pn">14</div>
+          <h3>Image Gallery</h3>
+          <p>
+            Galeri foto dengan layout grid, lightbox, dan navigasi keyboard.
+          </p>
+          <div class="tg">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+          </div>
+          <div class="pa">
+            <a href="projects/image-gallery/" class="bd">Live Demo</a
+            ><a href="downloads/image-gallery.zip" class="bsc">Source Code</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="contact">
+      <div class="sl">Kontak</div>
+      <div class="st">Hubungi Saya</div>
+      <div class="cg">
+        <a href="mailto:ramajuliantara2207@gmail.com" class="ci"
+          ><div class="cx">@</div>
+          <div class="cl">Email</div>
+          <div class="cv">ramajuliantara2207@gmail.com</div></a
+        >
+        <a href="https://wa.me/62895342600823" target="_blank" class="ci"
+          ><div class="cx">#</div>
+          <div class="cl">WhatsApp</div>
+          <div class="cv">0895-3426-00823</div></a
+        >
+        <a
+          href="https://www.instagram.com/raajuull_/"
+          target="_blank"
+          class="ci"
+          ><div class="cx">.</div>
+          <div class="cl">Instagram</div>
+          <div class="cv">@raajuull_</div></a
+        >
+        <a href="https://github.com/renoldvand" target="_blank" class="ci"
+          ><div class="cx">/</div>
+          <div class="cl">GitHub</div>
+          <div class="cv">renoldvand</div></a
+        >
+      </div>
+    </section>
+    <footer>2025 Rama Juliantara &mdash; SMKN 1 Denpasar</footer>
+    <script>
+      function ft(c, b) {
+        document.querySelectorAll(".fb").forEach(function (x) {
+          x.classList.remove("active");
+        });
+        b.classList.add("active");
+        document.querySelectorAll(".pc").forEach(function (x) {
+          x.style.display = c === "all" || x.dataset.cat === c ? "" : "none";
+        });
+      }
+    </script>
+  </body>
+</html>
