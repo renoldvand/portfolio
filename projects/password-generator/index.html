@@ -1,1 +1,250 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Password Generator</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Courier New',monospace;background:#0a0f0a;color:#4ade80;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}.pgb{max-width:460px;width:100%;padding:28px;border-radius:12px;background:#0f1a0f;border:1px solid #166534;box-shadow:0 0 30px rgba(34,197,94,.08)}.pgb h2{font-size:16px;margin-bottom:16px;color:#22c55e;letter-spacing:1px}.pd2{display:flex;align-items:center;gap:8px;padding:12px 16px;border-radius:8px;background:#0a0f0a;border:1px solid #166534;margin-bottom:20px}.pd2 input{flex:1;background:none;border:none;color:#4ade80;font-size:15px;font-family:inherit;letter-spacing:1px;outline:none}.pd2 button{padding:6px 12px;border-radius:4px;background:#166534;color:#4ade80;border:none;cursor:pointer;font-size:11px;font-family:inherit}.pd2 button:hover{background:#15803d}.og{margin-bottom:12px}.og label{display:flex;justify-content:space-between;font-size:12px;color:#22c55e;margin-bottom:5px}.og label span{color:#4ade80;font-weight:600}.og input[type=range]{width:100%;accent-color:#22c55e}.cg{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}.ci3{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;color:#86efac}.ci3 input{width:16px;height:16px;accent-color:#22c55e}.gb{width:100%;padding:12px;border-radius:6px;background:#166534;color:#4ade80;border:none;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;letter-spacing:1px}.gb:hover{background:#15803d}.sth{margin-top:14px;padding:10px;border-radius:6px;font-size:12px;text-align:center;display:none}.sth.w{display:block;background:rgba(239,68,68,.08);color:#fca5a5;border:1px solid #7f1d1d}.sth.m{display:block;background:rgba(245,158,11,.08);color:#fcd34d;border:1px solid #92400e}.sth.s{display:block;background:rgba(34,197,94,.08);color:#86efac;border:1px solid #166534}</style></head><body><div class="pgb"><h2>// PASSWORD GENERATOR</h2><div class="pd2"><input type="text" id="po" readonly value="Klik Generate!"><button onclick="cp()">Copy</button></div><div class="og"><label>Panjang Password <span id="lv">16</span></label><input type="range" id="lr" min="6" max="32" value="16" oninput="document.getElementById('lv').textContent=this.value"></div><div class="cg"><label class="ci3"><input type="checkbox" id="ou" checked> Huruf Besar (A-Z)</label><label class="ci3"><input type="checkbox" id="ol" checked> Huruf Kecil (a-z)</label><label class="ci3"><input type="checkbox" id="on" checked> Angka (0-9)</label><label class="ci3"><input type="checkbox" id="os" checked> Simbol (!@#$...)</label></div><button class="gb" onclick="gen()">GENERATE</button><div class="sth" id="sth"></div></div><div style="margin-top:48px;padding:24px 0;border-top:1px solid rgba(128,128,128,0.12);text-align:center"><a href="../../downloads/password-generator.zip" download style="display:inline-block;padding:13px 32px;border-radius:8px;background:#2563eb;color:#fff;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:-0.3px">Download Source Code (.zip)</a></div><script>function gen(){var len=parseInt(document.getElementById("lr").value),ch="";if(document.getElementById("ou").checked)ch+="ABCDEFGHIJKLMNOPQRSTUVWXYZ";if(document.getElementById("ol").checked)ch+="abcdefghijklmnopqrstuvwxyz";if(document.getElementById("on").checked)ch+="0123456789";if(document.getElementById("os").checked)ch+="!@#$%^&*()_+-=[]{}|;:,.<>?";if(!ch){alert("Pilih minimal satu!");return;}var p="";for(var i=0;i<len;i++)p+=ch.charAt(Math.floor(Math.random()*ch.length));document.getElementById("po").value=p;var s=document.getElementById("sth");if(len<10||ch.length<3){s.className="sth w";s.textContent="[WEAK] Tambah panjang & variasi karakter";}else if(len<16||ch.length<4){s.className="sth m";s.textContent="[MEDIUM] Bisa lebih kuat lagi";}else{s.className="sth s";s.textContent="[STRONG] Password sudah aman!";}}function cp(){document.getElementById("po").select();document.execCommand("copy");alert("Password disalin!");}</script></body></html>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Password Generator</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Courier New", monospace;
+        background: #0a0f0a;
+        color: #4ade80;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+      }
+      .pgb {
+        max-width: 460px;
+        width: 100%;
+        padding: 28px;
+        border-radius: 12px;
+        background: #0f1a0f;
+        border: 1px solid #166534;
+        box-shadow: 0 0 30px rgba(34, 197, 94, 0.08);
+      }
+      .pgb h2 {
+        font-size: 16px;
+        margin-bottom: 16px;
+        color: #22c55e;
+        letter-spacing: 1px;
+      }
+      .pd2 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        background: #0a0f0a;
+        border: 1px solid #166534;
+        margin-bottom: 20px;
+      }
+      .pd2 input {
+        flex: 1;
+        background: none;
+        border: none;
+        color: #4ade80;
+        font-size: 15px;
+        font-family: inherit;
+        letter-spacing: 1px;
+        outline: none;
+      }
+      .pd2 button {
+        padding: 6px 12px;
+        border-radius: 4px;
+        background: #166534;
+        color: #4ade80;
+        border: none;
+        cursor: pointer;
+        font-size: 11px;
+        font-family: inherit;
+      }
+      .pd2 button:hover {
+        background: #15803d;
+      }
+      .og {
+        margin-bottom: 12px;
+      }
+      .og label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #22c55e;
+        margin-bottom: 5px;
+      }
+      .og label span {
+        color: #4ade80;
+        font-weight: 600;
+      }
+      .og input[type="range"] {
+        width: 100%;
+        accent-color: #22c55e;
+      }
+      .cg {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .ci3 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        cursor: pointer;
+        color: #86efac;
+      }
+      .ci3 input {
+        width: 16px;
+        height: 16px;
+        accent-color: #22c55e;
+      }
+      .gb {
+        width: 100%;
+        padding: 12px;
+        border-radius: 6px;
+        background: #166534;
+        color: #4ade80;
+        border: none;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        font-family: inherit;
+        letter-spacing: 1px;
+      }
+      .gb:hover {
+        background: #15803d;
+      }
+      .sth {
+        margin-top: 14px;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        text-align: center;
+        display: none;
+      }
+      .sth.w {
+        display: block;
+        background: rgba(239, 68, 68, 0.08);
+        color: #fca5a5;
+        border: 1px solid #7f1d1d;
+      }
+      .sth.m {
+        display: block;
+        background: rgba(245, 158, 11, 0.08);
+        color: #fcd34d;
+        border: 1px solid #92400e;
+      }
+      .sth.s {
+        display: block;
+        background: rgba(34, 197, 94, 0.08);
+        color: #86efac;
+        border: 1px solid #166534;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pgb">
+      <h2>// PASSWORD GENERATOR</h2>
+      <div class="pd2">
+        <input type="text" id="po" readonly value="Klik Generate!" /><button
+          onclick="cp()"
+        >
+          Copy
+        </button>
+      </div>
+      <div class="og">
+        <label>Panjang Password <span id="lv">16</span></label
+        ><input
+          type="range"
+          id="lr"
+          min="6"
+          max="32"
+          value="16"
+          oninput="document.getElementById('lv').textContent = this.value"
+        />
+      </div>
+      <div class="cg">
+        <label class="ci3"
+          ><input type="checkbox" id="ou" checked /> Huruf Besar (A-Z)</label
+        ><label class="ci3"
+          ><input type="checkbox" id="ol" checked /> Huruf Kecil (a-z)</label
+        ><label class="ci3"
+          ><input type="checkbox" id="on" checked /> Angka (0-9)</label
+        ><label class="ci3"
+          ><input type="checkbox" id="os" checked /> Simbol (!@#$...)</label
+        >
+      </div>
+      <button class="gb" onclick="gen()">GENERATE</button>
+      <div class="sth" id="sth"></div>
+    </div>
+    <div
+      style="
+        margin-top: 48px;
+        padding: 24px 0;
+        border-top: 1px solid rgba(128, 128, 128, 0.12);
+        text-align: center;
+      "
+    >
+      <a
+        href="../../downloads/password-generator.zip"
+        download
+        style="
+          display: inline-block;
+          padding: 13px 32px;
+          border-radius: 8px;
+          background: #2563eb;
+          color: #fff;
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: -0.3px;
+        "
+        >Download Source Code (.zip)</a
+      >
+    </div>
+    <script>
+      function gen() {
+        var len = parseInt(document.getElementById("lr").value),
+          ch = "";
+        if (document.getElementById("ou").checked)
+          ch += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        if (document.getElementById("ol").checked)
+          ch += "abcdefghijklmnopqrstuvwxyz";
+        if (document.getElementById("on").checked) ch += "0123456789";
+        if (document.getElementById("os").checked)
+          ch += "!@#$%^&*()_+-=[]{}|;:,.<>?";
+        if (!ch) {
+          alert("Pilih minimal satu!");
+          return;
+        }
+        var p = "";
+        for (var i = 0; i < len; i++)
+          p += ch.charAt(Math.floor(Math.random() * ch.length));
+        document.getElementById("po").value = p;
+        var s = document.getElementById("sth");
+        if (len < 10 || ch.length < 3) {
+          s.className = "sth w";
+          s.textContent = "[WEAK] Tambah panjang & variasi karakter";
+        } else if (len < 16 || ch.length < 4) {
+          s.className = "sth m";
+          s.textContent = "[MEDIUM] Bisa lebih kuat lagi";
+        } else {
+          s.className = "sth s";
+          s.textContent = "[STRONG] Password sudah aman!";
+        }
+      }
+      function cp() {
+        document.getElementById("po").select();
+        document.execCommand("copy");
+        alert("Password disalin!");
+      }
+    </script>
+  </body>
+</html>
