@@ -1,1 +1,222 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>BMI Calculator</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#f0fdfa;color:#134e4a;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}.bb{max-width:400px;width:100%;padding:28px;border-radius:14px;background:#fff;border:2px solid #99f6e4;box-shadow:0 4px 20px rgba(20,184,166,.08)}.bb h2{font-size:20px;margin-bottom:4px;color:#0f766e}.bb .sub{color:#5eead4;font-size:12px;margin-bottom:20px}.fg{margin-bottom:12px}.fg label{display:block;font-size:11px;color:#0d9488;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}.fg input{width:100%;padding:10px 14px;border-radius:8px;border:1.5px solid #99f6e4;background:#f0fdfa;color:#134e4a;font-size:14px;outline:none}.fg input:focus{border-color:#14b8a6}.cb3{width:100%;padding:12px;border-radius:8px;background:#14b8a6;color:#fff;border:none;cursor:pointer;font-size:14px;font-weight:600;margin-top:6px}.cb3:hover{background:#0d9488}.br2{display:none;text-align:center;margin-top:22px;padding:22px;border-radius:12px;background:#f0fdfa;border:1px solid #99f6e4}.br2.show{display:block}.bv{font-size:44px;font-weight:600;letter-spacing:-2px}.bc2{font-size:15px;margin-top:3px}.bbar{height:7px;border-radius:4px;background:linear-gradient(to right,#22c55e,#f59e0b,#ef4444,#7f1d1d);margin-top:14px;position:relative}.bi2{width:4px;height:14px;background:#134e4a;border-radius:2px;position:absolute;top:-3.5px;transition:left .5s}.bi3{margin-top:18px;font-size:11px;color:#5eead4;line-height:1.8}.bi3 span{font-weight:600;color:#0d9488}</style></head><body><div class="bb"><h2>BMI Calculator</h2><p class="sub">Hitung Indeks Massa Tubuh kamu</p><div class="fg"><label>Berat Badan (kg)</label><input type="number" id="bw" placeholder="Contoh: 60"></div><div class="fg"><label>Tinggi Badan (cm)</label><input type="number" id="bh" placeholder="Contoh: 170"></div><button class="cb3" onclick="cbm()">Hitung BMI</button><div class="br2" id="br2"><div class="bv" id="bvl"></div><div class="bc2" id="bct"></div><div class="bbar"><div class="bi2" id="bi2"></div></div></div><div class="bi3"><span>Kurus:</span> &lt;18.5 | <span>Normal:</span> 18.5-24.9 | <span>Gemuk:</span> 25-29.9 | <span>Obesitas:</span> 30+</div></div><div style="margin-top:48px;padding:24px 0;border-top:1px solid rgba(128,128,128,0.12);text-align:center"><a href="../../downloads/bmi-calculator.zip" download style="display:inline-block;padding:13px 32px;border-radius:8px;background:#2563eb;color:#fff;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:-0.3px">Download Source Code (.zip)</a></div><script>function cbm(){var w=parseFloat(document.getElementById("bw").value),h=parseFloat(document.getElementById("bh").value)/100;if(!w||!h||w<=0||h<=0){alert("Masukkan data valid!");return;}var bmi=w/(h*h),r=bmi.toFixed(1);document.getElementById("bvl").textContent=r;var cat="",c="";if(bmi<18.5){cat="Kurus";c="#22c55e";}else if(bmi<25){cat="Normal";c="#22c55e";}else if(bmi<30){cat="Gemuk";c="#f59e0b";}else{cat="Obesitas";c="#ef4444";}document.getElementById("bct").textContent=cat;document.getElementById("bct").style.color=c;document.getElementById("bvl").style.color=c;document.getElementById("bi2").style.left="calc("+Math.min(Math.max((bmi-15)/25*100,0),100)+"% - 2px)";document.getElementById("br2").classList.add("show");}</script></body></html>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>BMI Calculator</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: system-ui, sans-serif;
+        background: #f0fdfa;
+        color: #134e4a;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+      }
+      .bb {
+        max-width: 400px;
+        width: 100%;
+        padding: 28px;
+        border-radius: 14px;
+        background: #fff;
+        border: 2px solid #99f6e4;
+        box-shadow: 0 4px 20px rgba(20, 184, 166, 0.08);
+      }
+      .bb h2 {
+        font-size: 20px;
+        margin-bottom: 4px;
+        color: #0f766e;
+      }
+      .bb .sub {
+        color: #5eead4;
+        font-size: 12px;
+        margin-bottom: 20px;
+      }
+      .fg {
+        margin-bottom: 12px;
+      }
+      .fg label {
+        display: block;
+        font-size: 11px;
+        color: #0d9488;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+      }
+      .fg input {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1.5px solid #99f6e4;
+        background: #f0fdfa;
+        color: #134e4a;
+        font-size: 14px;
+        outline: none;
+      }
+      .fg input:focus {
+        border-color: #14b8a6;
+      }
+      .cb3 {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        background: #14b8a6;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 6px;
+      }
+      .cb3:hover {
+        background: #0d9488;
+      }
+      .br2 {
+        display: none;
+        text-align: center;
+        margin-top: 22px;
+        padding: 22px;
+        border-radius: 12px;
+        background: #f0fdfa;
+        border: 1px solid #99f6e4;
+      }
+      .br2.show {
+        display: block;
+      }
+      .bv {
+        font-size: 44px;
+        font-weight: 600;
+        letter-spacing: -2px;
+      }
+      .bc2 {
+        font-size: 15px;
+        margin-top: 3px;
+      }
+      .bbar {
+        height: 7px;
+        border-radius: 4px;
+        background: linear-gradient(
+          to right,
+          #22c55e,
+          #f59e0b,
+          #ef4444,
+          #7f1d1d
+        );
+        margin-top: 14px;
+        position: relative;
+      }
+      .bi2 {
+        width: 4px;
+        height: 14px;
+        background: #134e4a;
+        border-radius: 2px;
+        position: absolute;
+        top: -3.5px;
+        transition: left 0.5s;
+      }
+      .bi3 {
+        margin-top: 18px;
+        font-size: 11px;
+        color: #5eead4;
+        line-height: 1.8;
+      }
+      .bi3 span {
+        font-weight: 600;
+        color: #0d9488;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bb">
+      <h2>BMI Calculator</h2>
+      <p class="sub">Hitung Indeks Massa Tubuh kamu</p>
+      <div class="fg">
+        <label>Berat Badan (kg)</label
+        ><input type="number" id="bw" placeholder="Contoh: 60" />
+      </div>
+      <div class="fg">
+        <label>Tinggi Badan (cm)</label
+        ><input type="number" id="bh" placeholder="Contoh: 170" />
+      </div>
+      <button class="cb3" onclick="cbm()">Hitung BMI</button>
+      <div class="br2" id="br2">
+        <div class="bv" id="bvl"></div>
+        <div class="bc2" id="bct"></div>
+        <div class="bbar"><div class="bi2" id="bi2"></div></div>
+      </div>
+      <div class="bi3">
+        <span>Kurus:</span> &lt;18.5 | <span>Normal:</span> 18.5-24.9 |
+        <span>Gemuk:</span> 25-29.9 | <span>Obesitas:</span> 30+
+      </div>
+    </div>
+    <div
+      style="
+        margin-top: 48px;
+        padding: 24px 0;
+        border-top: 1px solid rgba(128, 128, 128, 0.12);
+        text-align: center;
+      "
+    >
+      <a
+        href="../../downloads/bmi-calculator.zip"
+        download
+        style="
+          display: inline-block;
+          padding: 13px 32px;
+          border-radius: 8px;
+          background: #2563eb;
+          color: #fff;
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: -0.3px;
+        "
+        >Download Source Code (.zip)</a
+      >
+    </div>
+    <script>
+      function cbm() {
+        var w = parseFloat(document.getElementById("bw").value),
+          h = parseFloat(document.getElementById("bh").value) / 100;
+        if (!w || !h || w <= 0 || h <= 0) {
+          alert("Masukkan data valid!");
+          return;
+        }
+        var bmi = w / (h * h),
+          r = bmi.toFixed(1);
+        document.getElementById("bvl").textContent = r;
+        var cat = "",
+          c = "";
+        if (bmi < 18.5) {
+          cat = "Kurus";
+          c = "#22c55e";
+        } else if (bmi < 25) {
+          cat = "Normal";
+          c = "#22c55e";
+        } else if (bmi < 30) {
+          cat = "Gemuk";
+          c = "#f59e0b";
+        } else {
+          cat = "Obesitas";
+          c = "#ef4444";
+        }
+        document.getElementById("bct").textContent = cat;
+        document.getElementById("bct").style.color = c;
+        document.getElementById("bvl").style.color = c;
+        document.getElementById("bi2").style.left =
+          "calc(" +
+          Math.min(Math.max(((bmi - 15) / 25) * 100, 0), 100) +
+          "% - 2px)";
+        document.getElementById("br2").classList.add("show");
+      }
+    </script>
+  </body>
+</html>
