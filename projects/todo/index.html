@@ -163,60 +163,90 @@
     </div>
     <script>
       var ts = JSON.parse(localStorage.getItem("rt") || "[]");
+
       function rn() {
-        var l = document.getElementById("tl"),
-          e = document.getElementById("em"),
-          s = document.getElementById("st");
+        var l = document.getElementById("tl");
+        var e = document.getElementById("em");
+        var s = document.getElementById("st");
+
         l.innerHTML = "";
+
         if (!ts.length) {
           e.style.display = "block";
           s.innerHTML = "";
           return;
         }
+
         e.style.display = "none";
+
         var d = ts.filter(function (t) {
           return t.d;
         }).length;
-        s.innerHTML =
-          "<span>Total: " +
-          ts.length +
-          "</span><span>Selesai: " +
-          d +
-          "</span><span>Belum: " +
-          (ts.length - d) +
-          "</span>";
+
+        s.innerHTML = `
+      <span>Total: ${ts.length}</span>
+      <span>Selesai: ${d}</span>
+      <span>Belum: ${ts.length - d}</span>
+    `;
+
         ts.forEach(function (t, i) {
           var li = document.createElement("li");
           li.className = "ti" + (t.d ? " done" : "");
+
           li.innerHTML = `
-            <input type="checkbox" ${t.d ? "checked" : ""} onchange="tg(${i})">
-            <span>${t.t}</span>
-            <button class="db" onclick="dl(${i})">x</button>`;
+        <input type="checkbox" ${t.d ? "checked" : ""}>
+        <span>${t.t}</span>
+        <button class="db">x</button>
+      `;
+
+          var cb = li.querySelector('input[type="checkbox"]');
+          var db = li.querySelector(".db");
+
+          cb.addEventListener("change", function () {
+            tg(i);
+          });
+
+          db.addEventListener("click", function () {
+            dl(i);
+          });
+
           l.appendChild(li);
         });
       }
+
       function at() {
-        var inp = document.getElementById("ti"),
-          txt = inp.value.trim();
+        var inp = document.getElementById("ti");
+        var txt = inp.value.trim();
+
         if (!txt) return;
-        ts.push({ t: txt, d: false });
+
+        ts.push({
+          t: txt,
+          d: false,
+        });
+
         inp.value = "";
+
         sv();
         rn();
       }
+
       function tg(i) {
         ts[i].d = !ts[i].d;
         sv();
         rn();
       }
+
       function dl(i) {
         ts.splice(i, 1);
         sv();
         rn();
       }
+
       function sv() {
         localStorage.setItem("rt", JSON.stringify(ts));
       }
+
       rn();
     </script>
   </body>
