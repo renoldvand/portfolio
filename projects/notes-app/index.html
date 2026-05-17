@@ -1,1 +1,349 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Notes App</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#faf5ff;color:#3b0764;min-height:100vh;padding:32px}.wrap{max-width:620px;margin:0 auto}h1{font-size:24px;font-weight:700;margin-bottom:4px}.sub{color:#7c3aed;font-size:13px;margin-bottom:18px}.an2{display:flex;gap:8px;margin-bottom:18px}.an2 input{flex:1;padding:10px 14px;border-radius:8px;border:1.5px solid #e9d5ff;background:#fff;color:#3b0764;font-size:13px;outline:none}.an2 input:focus{border-color:#a78bfa}.an2 button{padding:10px 18px;border-radius:8px;background:#7c3aed;color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:600}.an2 button:hover{background:#6d28d9}.ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}.nc{padding:16px;border-radius:11px;transition:all .3s;position:relative}.nc:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.06)}.nc .nt{font-size:13px;font-weight:600;margin-bottom:5px}.nc .nb{font-size:11.5px;color:#6b21a8;line-height:1.5;margin-bottom:8px;white-space:pre-wrap}.nc .nd{font-size:9px;color:#a78bfa}.nc .na{position:absolute;top:6px;right:6px;display:flex;gap:2px}.nc .na button{width:24px;height:24px;border-radius:5px;border:none;cursor:pointer;font-size:12px;background:rgba(255,255,255,.5);color:#7c3aed;transition:all .2s}.nc .na button:hover{background:#fff}.nc .na .dx:hover{color:#ef4444}.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:999;align-items:center;justify-content:center}.mo.show{display:flex}.md{background:#fff;padding:24px;border-radius:14px;width:90%;max-width:380px;border:1px solid #e9d5ff}.md h3{margin-bottom:12px;font-size:16px;color:#3b0764}.md input,.md textarea{width:100%;padding:9px 12px;border-radius:8px;border:1.5px solid #e9d5ff;background:#faf5ff;color:#3b0764;font-size:13px;outline:none;margin-bottom:8px}.md textarea{height:90px;resize:vertical;font-family:inherit}.mb{display:flex;gap:8px;margin-top:4px}.mb button{flex:1;padding:9px;border-radius:8px;border:none;cursor:pointer;font-size:12px;font-weight:600}.empty{text-align:center;color:#a78bfa;padding:32px;grid-column:1/-1;font-size:13px}</style></head><body><div class="wrap"><h1>Notes App</h1><p class="sub">Catat ide dan pikiran kamu</p><div class="an2"><input id="qn" placeholder="Catatan cepat..." onkeypress="if(event.key==='Enter')qa()"><button onclick="om2()">+ Detail</button></div><div class="ng" id="ng"></div></div><div class="mo" id="nm"><div class="md"><h3 id="nmt">Tambah Catatan</h3><input id="nmt2" placeholder="Judul"><textarea id="nmb" placeholder="Isi catatan..."></textarea><div class="mb"><button style="background:#e9d5ff;color:#3b0764" onclick="cm2()">Batal</button><button style="background:#7c3aed;color:#fff" onclick="sn()">Simpan</button></div></div></div><div style="margin-top:48px;padding:24px 0;border-top:1px solid rgba(128,128,128,0.12);text-align:center"><a href="../../downloads/notes-app.zip" download style="display:inline-block;padding:13px 32px;border-radius:8px;background:#2563eb;color:#fff;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:-0.3px">Download Source Code (.zip)</a></div><script>var ns=JSON.parse(localStorage.getItem("rn2")||"[]"),ei=-1,cls=["#fef3c7","#dbeafe","#fce7f3","#d1fae5","#ede9fe","#fef9c3","#e0e7ff","#ffe4e6"];function sv(){localStorage.setItem("rn2",JSON.stringify(ns));}function rn2(){var g=document.getElementById("ng");if(!ns.length){g.innerHTML='<div class="empty">Belum ada catatan.</div>';return;}g.innerHTML=ns.map(function(n,i){return '<div class="nc" style="background:'+cls[i%cls.length]+'"><div class="na"><button onclick="en('+i+')">E</button><button class="dx" onclick="dn('+i+')">X</button></div><div class="nt">'+n.t+'</div><div class="nb">'+n.b+'</div><div class="nd">'+n.d+'</div></div>';}).join("");}function qa(){var inp=document.getElementById("qn"),txt=inp.value.trim();if(!txt)return;var now=new Date();ns.unshift({t:txt.split("\n")[0].substring(0,30),b:txt,d:now.toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})});inp.value="";sv();rn2();}function om2(){ei=-1;document.getElementById("nmt").textContent="Tambah Catatan";document.getElementById("nmt2").value="";document.getElementById("nmb").value="";document.getElementById("nm").classList.add("show");}function cm2(){document.getElementById("nm").classList.remove("show");}function en(i){ei=i;document.getElementById("nmt").textContent="Edit Catatan";document.getElementById("nmt2").value=ns[i].t;document.getElementById("nmb").value=ns[i].b;document.getElementById("nm").classList.add("show");}function sn(){var t=document.getElementById("nmt2").value.trim()||"Tanpa Judul",b=document.getElementById("nmb").value.trim();if(!b){alert("Isi tidak boleh kosong!");return;}var now=new Date(),d=now.toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"});if(ei===-1)ns.unshift({t:t,b:b,d:d});else ns[ei]={t:t,b:b,d:d};sv();rn2();cm2();}function dn(i){if(confirm("Hapus catatan ini?")){ns.splice(i,1);sv();rn2();}}rn2();</script></body></html>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Notes App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: system-ui, sans-serif;
+        background: #faf5ff;
+        color: #3b0764;
+        min-height: 100vh;
+        padding: 32px;
+      }
+      .wrap {
+        max-width: 620px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .sub {
+        color: #7c3aed;
+        font-size: 13px;
+        margin-bottom: 18px;
+      }
+      .an2 {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+      .an2 input {
+        flex: 1;
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1.5px solid #e9d5ff;
+        background: #fff;
+        color: #3b0764;
+        font-size: 13px;
+        outline: none;
+      }
+      .an2 input:focus {
+        border-color: #a78bfa;
+      }
+      .an2 button {
+        padding: 10px 18px;
+        border-radius: 8px;
+        background: #7c3aed;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .an2 button:hover {
+        background: #6d28d9;
+      }
+      .ng {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 10px;
+      }
+      .nc {
+        padding: 16px;
+        border-radius: 11px;
+        transition: all 0.3s;
+        position: relative;
+      }
+      .nc:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      }
+      .nc .nt {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+      .nc .nb {
+        font-size: 11.5px;
+        color: #6b21a8;
+        line-height: 1.5;
+        margin-bottom: 8px;
+        white-space: pre-wrap;
+      }
+      .nc .nd {
+        font-size: 9px;
+        color: #a78bfa;
+      }
+      .nc .na {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        display: flex;
+        gap: 2px;
+      }
+      .nc .na button {
+        width: 24px;
+        height: 24px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        font-size: 12px;
+        background: rgba(255, 255, 255, 0.5);
+        color: #7c3aed;
+        transition: all 0.2s;
+      }
+      .nc .na button:hover {
+        background: #fff;
+      }
+      .nc .na .dx:hover {
+        color: #ef4444;
+      }
+      .mo {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+        align-items: center;
+        justify-content: center;
+      }
+      .mo.show {
+        display: flex;
+      }
+      .md {
+        background: #fff;
+        padding: 24px;
+        border-radius: 14px;
+        width: 90%;
+        max-width: 380px;
+        border: 1px solid #e9d5ff;
+      }
+      .md h3 {
+        margin-bottom: 12px;
+        font-size: 16px;
+        color: #3b0764;
+      }
+      .md input,
+      .md textarea {
+        width: 100%;
+        padding: 9px 12px;
+        border-radius: 8px;
+        border: 1.5px solid #e9d5ff;
+        background: #faf5ff;
+        color: #3b0764;
+        font-size: 13px;
+        outline: none;
+        margin-bottom: 8px;
+      }
+      .md textarea {
+        height: 90px;
+        resize: vertical;
+        font-family: inherit;
+      }
+      .mb {
+        display: flex;
+        gap: 8px;
+        margin-top: 4px;
+      }
+      .mb button {
+        flex: 1;
+        padding: 9px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .empty {
+        text-align: center;
+        color: #a78bfa;
+        padding: 32px;
+        grid-column: 1/-1;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Notes App</h1>
+      <p class="sub">Catat ide dan pikiran kamu</p>
+      <div class="an2">
+        <input
+          id="qn"
+          placeholder="Catatan cepat..."
+          onkeypress="if (event.key === 'Enter') qa();"
+        /><button onclick="om2()">+ Detail</button>
+      </div>
+      <div class="ng" id="ng"></div>
+    </div>
+    <div class="mo" id="nm">
+      <div class="md">
+        <h3 id="nmt">Tambah Catatan</h3>
+        <input id="nmt2" placeholder="Judul" /><textarea
+          id="nmb"
+          placeholder="Isi catatan..."
+        ></textarea>
+        <div class="mb">
+          <button style="background: #e9d5ff; color: #3b0764" onclick="cm2()">
+            Batal</button
+          ><button style="background: #7c3aed; color: #fff" onclick="sn()">
+            Simpan
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      style="
+        margin-top: 48px;
+        padding: 24px 0;
+        border-top: 1px solid rgba(128, 128, 128, 0.12);
+        text-align: center;
+      "
+    >
+      <a
+        href="../../downloads/notes-app.zip"
+        download
+        style="
+          display: inline-block;
+          padding: 13px 32px;
+          border-radius: 8px;
+          background: #2563eb;
+          color: #fff;
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: -0.3px;
+        "
+        >Download Source Code (.zip)</a
+      >
+    </div>
+    <script>
+      var ns = JSON.parse(localStorage.getItem("rn2") || "[]"),
+        ei = -1,
+        cls = [
+          "#fef3c7",
+          "#dbeafe",
+          "#fce7f3",
+          "#d1fae5",
+          "#ede9fe",
+          "#fef9c3",
+          "#e0e7ff",
+          "#ffe4e6",
+        ];
+      function sv() {
+        localStorage.setItem("rn2", JSON.stringify(ns));
+      }
+      function rn2() {
+        var g = document.getElementById("ng");
+        if (!ns.length) {
+          g.innerHTML = '<div class="empty">Belum ada catatan.</div>';
+          return;
+        }
+        g.innerHTML = ns
+          .map(function (n, i) {
+            return (
+              '<div class="nc" style="background:' +
+              cls[i % cls.length] +
+              '"><div class="na"><button onclick="en(' +
+              i +
+              ')">E</button><button class="dx" onclick="dn(' +
+              i +
+              ')">X</button></div><div class="nt">' +
+              n.t +
+              '</div><div class="nb">' +
+              n.b +
+              '</div><div class="nd">' +
+              n.d +
+              "</div></div>"
+            );
+          })
+          .join("");
+      }
+      function qa() {
+        var inp = document.getElementById("qn"),
+          txt = inp.value.trim();
+        if (!txt) return;
+        var now = new Date();
+        ns.unshift({
+          t: txt.split("\n")[0].substring(0, 30),
+          b: txt,
+          d: now.toLocaleDateString("id-ID", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        });
+        inp.value = "";
+        sv();
+        rn2();
+      }
+      function om2() {
+        ei = -1;
+        document.getElementById("nmt").textContent = "Tambah Catatan";
+        document.getElementById("nmt2").value = "";
+        document.getElementById("nmb").value = "";
+        document.getElementById("nm").classList.add("show");
+      }
+      function cm2() {
+        document.getElementById("nm").classList.remove("show");
+      }
+      function en(i) {
+        ei = i;
+        document.getElementById("nmt").textContent = "Edit Catatan";
+        document.getElementById("nmt2").value = ns[i].t;
+        document.getElementById("nmb").value = ns[i].b;
+        document.getElementById("nm").classList.add("show");
+      }
+      function sn() {
+        var t = document.getElementById("nmt2").value.trim() || "Tanpa Judul",
+          b = document.getElementById("nmb").value.trim();
+        if (!b) {
+          alert("Isi tidak boleh kosong!");
+          return;
+        }
+        var now = new Date(),
+          d = now.toLocaleDateString("id-ID", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        if (ei === -1) ns.unshift({ t: t, b: b, d: d });
+        else ns[ei] = { t: t, b: b, d: d };
+        sv();
+        rn2();
+        cm2();
+      }
+      function dn(i) {
+        if (confirm("Hapus catatan ini?")) {
+          ns.splice(i, 1);
+          sv();
+          rn2();
+        }
+      }
+      rn2();
+    </script>
+  </body>
+</html>
